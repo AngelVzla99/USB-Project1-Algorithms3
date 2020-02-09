@@ -22,7 +22,18 @@ public abstract class Lado{
 	* @param: Vertice v, vertice al que queremos saber si incide.
     * @return: boolean, Indica si el lado ​l incide en el vértice ​ v.
     */
-	public boolean incide(Lado l, Vertice v){ return true; } 
+	public boolean incide(Lado l, Vertice v){ 
+		return (v.getId(v) == v1.getId(v1)) || (v.getId(v) == v2.getId(v1)); 
+	} 
+
+	public boolean bucle(Lado l, Vertice v){
+		return (v.getId(v) == v1.getId(v1)) && (v.getId(v) == v2.getId(v1)); 
+	}
+
+	public Vertice[] vertices(Lado l){ 
+		Vertice[] vertices ={l.v1, l.v2};
+		return vertices; 
+	}
 
 	/** Funcion que retorna el tipo del lado l.
 	* @param: Lado l, Lado al que nos referimos
@@ -39,7 +50,7 @@ public abstract class Lado{
 					 l.v1.toString(v1) + "\n" +
 					 l.v2.toString(v2) + "\n" +
 					 "Tipo: " + l.tipo + "\n" +
-					 "Peso: " + l.peso + "\n";
+					 "Peso: " + l.peso + "\n\n";
 		return out;
 	}
 }

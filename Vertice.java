@@ -1,14 +1,13 @@
 import java.util.*;
 import java.io.*;
 
-/** Clase vertice que permite identidicar un vertices a 
+/** Clase vertice que permite identificar un vertices a 
 partir de sus atributos: Identificador, nombre, coordenadas 
 (x,y) y el peso.
 
 * @author: Amin Arriaga 16-10072; Angel Garces 16-10400.
 * @version: 09/02/2020
 */
-
 public class Vertice{
 	private int identificador;	// Identificador del vertice
 	private String nombre;		// Nombre del vertice
@@ -68,7 +67,7 @@ public class Vertice{
 		String out = "Nombre: "+ v.nombre + "\n" +
 					 "Identificador: "+ v.identificador + "\n" +
 					 "Coordenadas: "+ "(" + v.x + "," +v.y+ ")" + "\n" +
-					 "Peso: "+ v.peso + "\n";
+					 "Peso: "+ v.peso + "\n\n";
 		return out;
 	}
 }

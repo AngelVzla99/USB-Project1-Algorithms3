@@ -21,12 +21,12 @@ class ClienteGrafo{
     	*/
 
         // Crear dos vertice ( Borrar si quieres Amin )
-        Vertice v1 = new Vertice(1, "Caracas", 1.2, 1.5, 100);
-        Vertice v2 = new Vertice(2, "Apure", 1000, 1000.99, 5);
-
-        Arista arco = new Arista(v1,v2,7,10.5);
-
-        System.out.println( arco.toString(arco) );
+        /*Grafo g = new Grafo();
+        g.crearGrafo(args[0], g);
+        System.out.println(g.numeroDeVertices(g));
+        System.out.println(g.vertices(g));
+        System.out.println(g.toString(g));
+        */
     	//----
     }
 }

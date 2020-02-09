@@ -9,8 +9,8 @@ import java.util.*;
 public class Arista extends Lado{
 
 	/** Constructor de la clase Vertice
-    * @param: Vertice v, vertice de partida.
-    * @param: Vertice v, vertice de llegada.
+    * @param: Vertice u, primer vertice extremo de la arista.
+    * @param: Vertice v, segundo vertice extremo de la arista.
     * @param: int tipo, tipo del lado(Arista).
     * @param: double peso, peso del lado(Arista).
     */
