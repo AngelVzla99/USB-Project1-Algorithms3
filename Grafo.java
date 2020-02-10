@@ -13,8 +13,8 @@ public abstract class Grafo{
     protected ArrayList<Lado> listLados = new ArrayList();     // Lista de lados.
 
     /** Metodo que permite leer un archivo
-    @param String ubicacion del archivo, incluyendo su nombre.
-    @return String contenido del archivo.
+    * @param String ubicacion del archivo, incluyendo su nombre.
+    * @return String contenido del archivo.
     */
     protected String readGraph(String f)throws IOException { 
 
@@ -34,44 +34,48 @@ public abstract class Grafo{
 
     /** Metodo base que permite la creacion de grafos dado un archivo con su informacion. 
     Su implementacion queda a cargo de las clases que la heredan.
-    @param String direccion del archivo, incluyendo su nombre.
-    @return Boolean que indica si la lectura se hizo con exito.
+    * @param String direccion del archivo, incluyendo su nombre.
+    * @return Boolean que indica si la lectura se hizo con exito.
     */
-    public boolean crearGrafo(String file)throws IOException { return true; }
+    public boolean crearGrafo(String file)
+        throws IOException,
+        NumberFormatException,
+        NoSuchElementException   
+    { return true; }
 
 
     /** Metodo que retorna el numero de vertices del grafo.
-    @param Grafo informacion del grafo.
-    @return Int numero de vertices.
+    * @param Grafo informacion del grafo.
+    * @return Int numero de vertices.
     */
     public int numeroDeVertices(Grafo g) { return g.numV; }
 
 
     /** Metodo que retorna el numero de lados del grafo.
-    @param Grafo informacion del grafo.
-    @return Int numero de lados.
+    * @param Grafo informacion del grafo.
+    * @return Int numero de lados.
     */
     public int numeroDeLados(Grafo g) { return g.numL; }
 
 
     /** Metodo que retorna un arreglo con los vertices del grafo.
-    @param Grafo informacion del grafo.
-    @return ArrayList<Vertice> lista de vertices.
+    * @param Grafo informacion del grafo.
+    * @return ArrayList<Vertice> lista de vertices.
     */
     public ArrayList<Vertice> vertices(Grafo g) { return g.listVert; }
 
 
     /** Metodo que retorna un arreglo con los lados del grafo.
-    @param Grafo con la informacion del grafo.
-    @return ArrayList<Lado> lista de lados.
+    * @param Grafo con la informacion del grafo.
+    * @return ArrayList<Lado> lista de lados.
     */
     public ArrayList lados(Grafo g) { return g.listLados; }
 
 
     /** Metodo que verifica si se encuentra un vertice en un grafo.
-    @param Grafo informacion del grafo.
-    @param Int ID del vertice.
-    @return Boolean que indica si el vertice se encuentra en el grafo.
+    * @param Grafo informacion del grafo.
+    * @param int ID del vertice.
+    * @return Boolean que indica si el vertice se encuentra en el grafo.
     */
     public boolean estaVertice(Grafo g, int id) {
 
@@ -90,15 +94,14 @@ public abstract class Grafo{
 
 
     /** Metodo que agrega un vertice al grafo.
-    @param Grafo informacion del grafo.
-    @param Vertice informacion del vertice.
-    @return Boolean que indica si el vertice se agrego correctamente.
+    * @param Grafo informacion del grafo.
+    * @param Vertice informacion del vertice.
+    * @return Boolean que indica si el vertice se agrego correctamente.
     */
     public boolean agregarVertice(Grafo g, Vertice v) {
 
         // Si el vertice ya se encuentra en el grafo, entonces no se puede agregar.
         if (g.estaVertice(g, v.getId(v))){
-            System.out.println("Ya hay un vertice con ese ID.");
             return false;
         } else {
             g.listVert.add(v);
@@ -109,19 +112,18 @@ public abstract class Grafo{
 
 
     /** Metodo que agrega un vertice al grafo.
-    @param Grafo informacion del grafo.
-    @param Int ID del vertice.
-    @param String nombre del vertice.
-    @param double coordenada x del vertice.
-    @param double coordenada y del vertice.
-    @param double peso del vertice.
-    @return Boolean que indica si el vertice se agrego correctamente.
+    * @param Grafo informacion del grafo.
+    * @param int ID del vertice.
+    * @param String nombre del vertice.
+    * @param double coordenada x del vertice.
+    * @param double coordenada y del vertice.
+    * @param double peso del vertice.
+    * @return Boolean que indica si el vertice se agrego correctamente.
     */
     public boolean agregarVertice(Grafo g, int id, String nombre, double x, double y, double p) {
 
         // Si el vertice ya se encuentra en el grafo, entonces no se puede agregar.
         if (g.estaVertice(g, id)){
-            System.out.println("Ya hay un vertice con ese ID.");
             return false;
         } else {
             Vertice v = new Vertice(id, nombre, x, y, p);
@@ -133,11 +135,11 @@ public abstract class Grafo{
 
 
     /** Metodo que retorna un vertice de un grafo dado su ID.
-    @param Grafo informacion del grafo.
-    @param Int ID del vertice.
-    @return Vertice con la informacion del vertice.
+    * @param Grafo informacion del grafo.
+    * @param int ID del vertice.
+    * @return Vertice con la informacion del vertice.
     */
-    public Vertice obtenerVertice(Grafo g, int id) {
+    public Vertice obtenerVertice(Grafo g, int id)throws NoSuchElementException {
 
         Vertice v;  // Contendra la informacion del i-esimo vertice del grafo.
 
@@ -150,15 +152,16 @@ public abstract class Grafo{
         }
 
         // Si no encontramos ningun vertice con el ID indicado, error.
-        System.out.println("Vertice no encontrado.");
-        return new Vertice(0, "", 0, 0, 0);
+        String msg = "Elemento inexistente. El vertice con ID " + String.valueOf(id) +
+            " no se encuentra en el grafo.";
+        throw new NoSuchElementException(msg);
     }
 
 
     /** Metodo que elimina un vertice de un grafo dado su ID.
-    @param Grafo informacion del grafo.
-    @param Int ID del vertice.
-    @return Boolean indica si la eliminacion se hizo correctamente.
+    * @param Grafo informacion del grafo.
+    * @param int ID del vertice.
+    * @return Boolean indica si la eliminacion se hizo correctamente.
     */
     public boolean eliminarVertice(Grafo g, int id) {
 
@@ -180,11 +183,11 @@ public abstract class Grafo{
 
 
     /** Metodo que retorna el grafo de un vertice en un grafo.
-    @param Grafo informacion del grafo.
-    @param Int ID del vertice.
-    @return Int con el grado del vertice.
+    * @param Grafo informacion del grafo.
+    * @param int ID del vertice.
+    * @return Int con el grado del vertice.
     */
-    public int grado(Grafo g, int id) {
+    public int grado(Grafo g, int id)throws NoSuchElementException {
 
         // Verificamos que efectivamente el vertice se encuentre en el grafo.
         if (g.estaVertice(g, id)) {
@@ -213,18 +216,19 @@ public abstract class Grafo{
         } else {
 
             // Si el vertice no se encuentra en el grafo, error.
-            System.out.println("NO se encontro el vertice.");
-            return -1;
+            String msg = "Elemento inexistente. El vertice con ID " + String.valueOf(id) +
+                " no se encuentra en el grafo.";
+            throw new NoSuchElementException(msg);
         }
     }
 
 
     /** Metodo que dado un vertice, retorna un arreglo con sus adyacencias.
-    @param Grafo informacion del grafo.
-    @param Int ID del vertice.
-    @return ArrayList adyacencias del vertice.
+    * @param Grafo informacion del grafo.
+    * @param int ID del vertice.
+    * @return ArrayList adyacencias del vertice.
     */
-    public ArrayList adyacentes(Grafo g, int id) {
+    public ArrayList adyacentes(Grafo g, int id)throws NoSuchElementException {
 
         // Verificamos que efectivamente el vertice se encuentre en el grafo.
         if (g.estaVertice(g, id)) {
@@ -259,18 +263,19 @@ public abstract class Grafo{
         } else {
 
             // Si el vertice no se encuentra en el grafo, error.
-            System.out.println("NO se encontro el vertice.");
-            return new ArrayList();
+            String msg = "Elemento inexistente. El vertice con ID " + String.valueOf(id) +
+                " no se encuentra en el grafo.";
+            throw new NoSuchElementException(msg);
         }
     }
 
 
     /** Metodo que dado un vertice, retorna un arreglo con sus lados incidentes.
-    @param Grafo informacion del grafo.
-    @param Int ID del vertice.
-    @return ArrayList lados incidentes del vertice.
+    * @param Grafo informacion del grafo.
+    * @param int ID del vertice.
+    * @return ArrayList lados incidentes del vertice.
     */
-    public ArrayList incidentes(Grafo g, int id) {
+    public ArrayList incidentes(Grafo g, int id)throws NoSuchElementException {
 
         // Verificamos que efectivamente el vertice se encuentre en el grafo.
         if (g.estaVertice(g, id)) {
@@ -293,18 +298,28 @@ public abstract class Grafo{
         } else {
 
             // Si el vertice no se encuentra en el grafo, error.
-            System.out.println("NO se encontro el vertice.");
-            return new ArrayList();
+            String msg = "Elemento inexistente. El vertice con ID " + String.valueOf(id) +
+                " no se encuentra en el grafo.";
+            throw new NoSuchElementException(msg);
         }
     }
 
 
     /** Metodo base que retorna un clon del grafo actual.
     Su implementacion queda a cargo de las clases que la heredan.
-    @param Grafo informacion del grafo.
-    @return Grafo informacion del grafo.
+    * @param Grafo informacion del grafo.
+    * @return Grafo informacion del grafo.
     */
     public Grafo clone(Grafo g){ return this; }
+
+
+    /** Metodo que elimina todos los datos del grafo, dejandolo en un grafo vacio. */
+    protected void flush(){
+        this.numV = 0;     // Numero de vertices
+        this.numL = 0;     // Numero de de lados.
+        this.listVert = new ArrayList();   // Lista de vertices.
+        this.listLados = new ArrayList();     // Lista de lados.
+    }
 
 
     /** Funcion que retorna un string con todos los atributos del grafo..
@@ -334,5 +349,14 @@ public abstract class Grafo{
 					 stringLados;
 
         return out;
+    }
+
+    /** Clase que crea la excepcion para informar sobre un vertice inexistente.
+    * @param String mensaje que se indicara al conseguir el error.
+    */
+    public class NoSuchElementException extends Exception {
+        public NoSuchElementException(String msg) {
+            super (msg);
+        }
     }
 }
